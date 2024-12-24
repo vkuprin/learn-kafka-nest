@@ -29,7 +29,7 @@ pnpm install
 
 ### For kafka-sub
 ```bash
-cd ../kafka-sub
+cd kafka-sub
 pnpm install
 ```
 
