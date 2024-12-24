@@ -11,8 +11,13 @@ export class TaskService {
 	) {}
 
 	public async create(title: string, description?: string): Promise<void> {
-		const newTask = new Task({ title, description, status: "pending" });
-		console.log(newTask);
-		await this._taskRepository.createTask(newTask);
+		try {
+			const newTask = new Task({ title, description, status: "pending" });
+			console.log(newTask);
+			await this._taskRepository.createTask(newTask);
+		} catch (error) {
+			console.error('Error in create:', error);
+			throw error;
+		}
 	}
 }
