@@ -6,7 +6,9 @@ import * as compression from "compression";
 import { AppModule } from "./app/app.module";
 
 async function bootstrap() {
-	const app = await NestFactory.create<INestApplication>(AppModule);
+	const app = await NestFactory.create<INestApplication>(AppModule, {
+		logger: ['error', 'warn', 'log', 'debug', 'verbose']
+	});
 
 	// compression //
 	app.use(compression());

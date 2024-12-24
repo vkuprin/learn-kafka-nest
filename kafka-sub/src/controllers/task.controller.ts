@@ -22,8 +22,13 @@ export class TaskController implements TaskControllerPort, OnModuleInit {
 	// -------------------------------PUBLIC--------------------------------- //
 
 	public async createTask(dto: TCreateTaskDto): Promise<void> {
-		const { title, description } = await CreateTaskTransformer.parseAsync(dto);
-		await this._taskService.createTask(title, description);
+		try {
+			const { title, description } = await CreateTaskTransformer.parseAsync(dto);
+			await this._taskService.createTask(title, description);
+		} catch (error) {
+			console.error('Error in createTask:', error);
+			throw error;
+		}
 	}
 
 	// -------------------------------PRIVATE-------------------------------- //
@@ -33,17 +38,18 @@ export class TaskController implements TaskControllerPort, OnModuleInit {
 	}
 
 	private async _addTaskCreatedConsumer(): Promise<void> {
-		await this._messageBrokerHelper.consume(
-			MessageBrokerTopicEnum.TASK_CREATED,
-			{
-				eachMessage: async ({ message }) => {
+		await this._messageBrokerHelper.consume(MessageBrokerTopicEnum.TASK_CREATED, {
+			eachMessage: async ({ message }) => {
+				try {
 					if (!message.value) {
 						return;
 					}
 					const taskDto = JSON.parse(message.value.toString());
 					await this.createTask(taskDto);
-				},
+				} catch (err) {
+					console.error("Error in TASK_CREATED consumer:", err);
+				}
 			},
-		);
+		});
 	}
 }
