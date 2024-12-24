@@ -52,3 +52,11 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 cd kafka-sub
 pnpm migration:run
 ```
+
+### Test creating a task
+
+```bash
+ curl -X POST http://localhost:3000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"title": "test task", "description": "test description"}'
+```
