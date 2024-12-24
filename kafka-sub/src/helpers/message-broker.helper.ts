@@ -13,7 +13,7 @@ import {
 	type ConsumerConfig,
 	type ConsumerRunConfig,
 	Kafka,
-	type KafkaConfig,
+	type KafkaConfig, logLevel,
 } from "kafkajs";
 
 @Injectable()
@@ -58,6 +58,7 @@ export class MessageBrokerHelper implements OnApplicationShutdown {
 		return {
 			clientId: kafkaClientId,
 			brokers: [kafkaHost],
+			logLevel: logLevel.DEBUG,
 		};
 	}
 

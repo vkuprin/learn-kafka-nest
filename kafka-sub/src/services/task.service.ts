@@ -37,15 +37,19 @@ export class TaskService {
 
 	// -------------------------------PRIVATE--------------------------------- //
 
-	@Interval(5_000) // 5 seconds
+	@Interval(5_000)
 	private async _processCreateTaskRequests(): Promise<void> {
-		if (this._createTaskRequestsList.length === 0) {
-			return;
+		try {
+			if (this._createTaskRequestsList.length === 0) {
+				return;
+			}
+			const tasksBatch = this._createTaskRequestsList.splice(
+				0,
+				this._createTaskRequestsList.length,
+			);
+			await this._taskRepository.createTasks(tasksBatch);
+		} catch (err) {
+			console.error('Error in _processCreateTaskRequests():', err);
 		}
-		const tasksBatch = this._createTaskRequestsList.splice(
-			0,
-			this._createTaskRequestsList.length,
-		);
-		await this._taskRepository.createTasks(tasksBatch);
 	}
 }

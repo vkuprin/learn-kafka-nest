@@ -14,6 +14,7 @@ import {
 	type AdminConfig,
 	Kafka,
 	type KafkaConfig,
+	logLevel,
 	Partitioners,
 	type Producer,
 	type ProducerConfig,
@@ -78,6 +79,7 @@ export class KafkaAdapter<T = unknown>
 		return {
 			clientId: kafkaClientId,
 			brokers: [kafkaHost],
+			logLevel: logLevel.DEBUG,
 		};
 	}
 
