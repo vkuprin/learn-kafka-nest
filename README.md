@@ -21,19 +21,19 @@ The project consists of two microservices:
 
 ## Installation
 
-# For kafka-pub
+### For kafka-pub
 ```bash
 cd kafka-pub
 pnpm install
 ```
 
-# For kafka-sub
+### For kafka-sub
 ```bash
 cd ../kafka-sub
 pnpm install
 ```
 
-# In project root directory
+## In project root directory
 ```bash
 docker compose up -d
 ```
