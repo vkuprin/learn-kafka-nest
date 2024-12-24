@@ -1,6 +1,6 @@
 # Kafka Microservices Project
 
-A demonstration of microservices architecture using Apache Kafka for message exchange between services.
+A demonstration of microservices architecture using Apache Kafka for message exchange between services
 
 ## Architecture
 
