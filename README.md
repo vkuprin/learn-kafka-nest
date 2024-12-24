@@ -50,6 +50,5 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 ```bash
 cd kafka-sub
-pnpm migration:generate
 pnpm migration:run
 ```
