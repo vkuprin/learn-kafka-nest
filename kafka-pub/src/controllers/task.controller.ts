@@ -20,7 +20,12 @@ export class TaskController implements TaskControllerPort {
 	@HttpCode(HttpStatus.CREATED)
 	@Post()
 	public async createTask(@Body() dto: TCreateTaskDto): Promise<void> {
-		const { title, description } = await CreateTaskTransformer.parseAsync(dto);
-		await this._taskService.create(title, description);
+		try {
+			const { title, description } = await CreateTaskTransformer.parseAsync(dto);
+			await this._taskService.create(title, description);
+		} catch (error) {
+			console.error('Error in createTask:', error);
+			throw error;
+		}
 	}
 }
