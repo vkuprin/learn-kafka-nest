@@ -37,3 +37,19 @@ pnpm install
 ```bash
 docker compose up -d
 ```
+
+## Migrations
+
+```bash
+docker exec -it learn-kafka-postgres-1 psql -U postgres -d kafka_db
+```
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
+
+```bash
+cd kafka-sub
+pnpm migration:generate
+pnpm migration:run
+```
